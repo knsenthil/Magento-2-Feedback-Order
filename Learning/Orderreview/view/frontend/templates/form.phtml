@@ -1,0 +1,37 @@
+<div class="feedback-form">
+	<div>
+	
+	</div>
+	
+	<form data-mage-init='{"validation":{}}' class="form" action="<?php echo $block->getUrl('feedback/index/post'); ?>" method="post">
+	<?php echo  $block->getCustomerId().'-- from block';
+	?>
+    <fieldset class="fieldset">
+        <label>Feedback Comments:</label>
+		<textarea name="feedback" class="required" required="true" rows="4" cols="50">Pls write you feedback.</textarea>
+    </fieldset>
+	<fieldset class="fieldset">
+        <label>Rating:</label>
+		<input type="text" data-validate='{"required":true,"maxlength":1,"digits":true}' name="rate"/>
+		<span>1->Pover,2->Below Avg,3->Avg,4->Good,5->Very Good</span>
+		<input type="text" name="order" value="<?php echo $block->getRequest()->getParam('id'); ?>"/>
+	</fieldset>
+    <div class="actions-toolbar">
+        <div class="primary">
+            <button type="submit" class="action submit primary" title="<?php /* @escapeNotVerified */ echo __('Submit') ?>">
+                <span><?php /* @escapeNotVerified */ echo __('Submit') ?></span>
+            </button>
+        </div>
+    </div>
+</form>
+	
+</div>
+<?php
+/*$categoryId = 3;
+$category = $this->helper('Atwix\CategoryAttribute\Helper\Data')->getChildCategoryDetails($categoryId);
+echo "<pre>"; print_r($category); 
+$_objectManager = \Magento\Framework\App\ObjectManager::getInstance();
+$object_manager = $_objectManager->create('Magento\Catalog\Model\Category')->load($categoryId); */
+//echo "<pre>";
+//print_r($object_manager->getData());
+?>

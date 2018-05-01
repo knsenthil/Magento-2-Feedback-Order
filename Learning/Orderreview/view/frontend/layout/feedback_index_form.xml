@@ -1,0 +1,16 @@
+<?xml version="1.0"?>
+<page xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" layout="1column" xsi:noNamespaceSchemaLocation="urn:magento:framework:View/Layout/etc/page_configuration.xsd">
+	<head>
+        <title>Feedback Form</title>
+    </head>
+    <body>
+    <referenceContainer name="content">
+        <block class="Learning\Orderreview\Block\Form" name="review_form" template="Learning_Orderreview::form.phtml" cacheable="false"/>
+    </referenceContainer>
+	</body>
+	<!--<referenceBlock name="sales.order.history">
+		<action method="setTemplate">
+			<argument name="template" xsi:type="string">Learning_Orderreview::order/history.phtml</argument>
+		</action>
+	</referenceBlock >-->
+</page>

@@ -1,0 +1,8 @@
+<?xml version="1.0"?>
+<config xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="urn:magento:module:Magento_Backend:etc/menu.xsd">
+    <menu>
+        <add id="Learning_Orderreview::orderreview" title="Order Feedback" module="Learning_Orderreview" sortOrder="51" resource="Learning_Orderreview::orderreview"/>
+        <add id="Learning_Orderreview::manage" title="Manage Feedback" module="Learning_Orderreview" sortOrder="10" action="orderreview/feedback" resource="Learning_Orderreview::feedback" parent="Learning_Orderreview::orderreview"/>
+        <add id="Learning_Orderreview::layoutmanage" title="Manage Layout Feedback" module="Learning_Orderreview" sortOrder="10" action="learning_orderreview/layoutfeedback" resource="Learning_Orderreview::feedback" parent="Learning_Orderreview::orderreview"/>
+    </menu>
+</config>

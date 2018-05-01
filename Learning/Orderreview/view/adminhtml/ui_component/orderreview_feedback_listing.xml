@@ -1,0 +1,338 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!--
+/**
+ * Grid record list UI Component
+ * @category  Webkul
+ * @package   Webkul_Grid
+ * @author    Webkul
+ * @copyright Copyright (c) 2010-2017 Webkul Software Private Limited (https://webkul.com)
+ * @license   https://store.webkul.com/license.html
+ */
+-->
+<listing xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="urn:magento:framework:Ui/etc/ui_configuration.xsd">
+    <argument name="data" xsi:type="array">
+        <item name="js_config" xsi:type="array">
+            <item name="provider" xsi:type="string">orderreview_feedback_listing.orderreview_feedback_listing_data_source</item>
+            <item name="deps" xsi:type="string">orderreview_feedback_listing.orderreview_feedback_listing_data_source</item>
+        </item>
+		<!-- define column type -->
+        <item name="spinner" xsi:type="string">orderrevie_feedback_columns</item>
+		<!-- Button to add new item -->
+        <item name="buttons" xsi:type="array">
+            <item name="add" xsi:type="array">
+                <item name="name" xsi:type="string">add</item>
+                <item name="label" xsi:type="string" translate="true">Add New Row</item>
+                <item name="class" xsi:type="string">primary</item>
+                <item name="url" xsi:type="string">*/*/newAction</item>
+            </item>
+        </item>
+    </argument>
+    <dataSource name="orderreview_feedback_listing_data_source">
+        <argument name="dataProvider" xsi:type="configurableObject">
+            <argument name="class" xsi:type="string">OrderreviewGridDataProvider</argument>
+            <argument name="name" xsi:type="string">orderreview_feedback_listing_data_source</argument>
+            <argument name="primaryFieldName" xsi:type="string">id</argument>
+            <argument name="requestFieldName" xsi:type="string">id</argument>
+            <argument name="data" xsi:type="array">
+                <item name="config" xsi:type="array">
+                    <item name="update_url" xsi:type="url" path="mui/index/render"/>
+                    <item name="storageConfig" xsi:type="array">
+                        <!-- Primary key column name -->
+                        <item name="indexField" xsi:type="string">id</item>
+                    </item>
+                </item>
+            </argument>
+        </argument>
+        <argument name="data" xsi:type="array">
+            <item name="js_config" xsi:type="array">
+                <item name="component" xsi:type="string">Magento_Ui/js/grid/provider</item>
+            </item>
+        </argument>
+    </dataSource>
+	
+	<!-- Container Listing Top -->
+    <container name="listing_top">
+        <argument name="data" xsi:type="array">
+            <item name="config" xsi:type="array">
+                <item name="template" xsi:type="string">ui/grid/toolbar</item>
+            </item>
+        </argument>
+        <!-- Button to manage views -->
+        <bookmark name="bookmarks">
+            <argument name="data" xsi:type="array">
+                <item name="config" xsi:type="array">
+                    <item name="component" xsi:type="string">Magento_Ui/js/grid/controls/bookmarks/bookmarks</item>
+                    <item name="displayArea" xsi:type="string">dataGridActions</item>
+                    <item name="storageConfig" xsi:type="array">
+                        <item name="saveUrl" xsi:type="url" path="mui/bookmark/save"/>
+                        <item name="deleteUrl" xsi:type="url" path="mui/bookmark/delete"/>
+                        <item name="namespace" xsi:type="string">orderreview_feedback_listing</item>
+                    </item>
+                </item>
+            </argument>
+        </bookmark>
+        <!-- Button to manage columns -->
+        <container name="columns_controls">
+            <argument name="data" xsi:type="array">
+                <item name="config" xsi:type="array">
+                    <item name="columnsData" xsi:type="array">
+                        <item name="provider" xsi:type="string">orderreview_feedback_listing.orderreview_feedback_listing.orderrevie_feedback_columns</item>
+                    </item>
+                    <item name="component" xsi:type="string">Magento_Ui/js/grid/controls/columns</item>
+                    <item name="displayArea" xsi:type="string">dataGridActions</item>
+                </item>
+            </argument>
+        </container>
+		
+		<!-- Filters -->
+        <filters name="listing_filters">
+            <argument name="data" xsi:type="array">
+                <item name="config" xsi:type="array">
+                    <item name="storageConfig" xsi:type="array">
+                        <item name="provider" xsi:type="string">orderreview_feedback_listing.orderreview_feedback_listing.listing_top.bookmarks</item>
+                        <item name="namespace" xsi:type="string">current.filters</item>
+                    </item>
+                    <item name="childDefaults" xsi:type="array">
+                        <item name="provider" xsi:type="string">orderreview_feedback_listing.orderreview_feedback_listing.listing_top.listing_filters</item>
+                        <item name="imports" xsi:type="array">
+                            <item name="visible" xsi:type="string">orderreview_feedback_listing.orderreview_feedback_listing.listing_top.bookmarks:current.columns.${ $.index }.visible</item>
+                        </item>
+                    </item>
+                </item>
+            </argument>
+            <!-- Department ID Filter -->
+            <filterRange name="id">
+                <argument name="data" xsi:type="array">
+                    <item name="config" xsi:type="array">
+                        <item name="dataScope" xsi:type="string">id</item> <!-- Column name in DB -->
+                        <item name="label" xsi:type="string" translate="true">ID</item> <!-- Label on grid -->
+                        <item name="childDefaults" xsi:type="array">
+                            <item name="provider" xsi:type="string">orderreview_feedback_listing.orderreview_feedback_listing.listing_top.listing_filters</item>
+                        </item>
+                    </item>
+                </argument>
+                <filterInput name="from">
+                    <argument name="data" xsi:type="array">
+                        <item name="config" xsi:type="array">
+                            <item name="dataScope" xsi:type="string">from</item>
+                            <item name="label" xsi:type="string" translate="true">from</item>
+                            <item name="placeholder" xsi:type="string" translate="true">From</item>
+                        </item>
+                    </argument>
+                </filterInput>
+                <filterInput name="to">
+                    <argument name="data" xsi:type="array">
+                        <item name="config" xsi:type="array">
+                            <item name="dataScope" xsi:type="string">to</item>
+                            <item name="label" xsi:type="string" translate="true">to</item>
+                            <item name="placeholder" xsi:type="string" translate="true">To</item>
+                        </item>
+                    </argument>
+                </filterInput>
+            </filterRange>
+            <!-- Department name Filter -->
+            <!--<filterInput name="customer_id">
+                <argument name="data" xsi:type="array">
+                    <item name="config" xsi:type="array">
+                        <item name="dataScope" xsi:type="string">customer_id</item> //Column name in DB
+                        <item name="label" xsi:type="string" translate="true">Customer</item> //Label on grid
+                    </item>
+                </argument>
+            </filterInput>-->
+        </filters>
+		
+		<!-- Filter Search -->
+		<filterSearch name="fulltext">
+			<argument name="data" xsi:type="array">
+				<item name="config" xsi:type="array">
+					<item name="provider" xsi:type="string">orderreview_feedback_listing.orderreview_feedback_listing_data_source</item>
+					<item name="chipsProvider" xsi:type="string">orderreview_feedback_listing.orderreview_feedback_listing.listing_top.listing_filters_chips</item>
+					<item name="storageConfig" xsi:type="array">
+						<item name="provider" xsi:type="string">orderreview_feedback_listing.orderreview_feedback_listing.listing_top.bookmarks</item>
+						<item name="namespace" xsi:type="string">current.search</item>
+					</item>
+				</item>
+			</argument>
+		</filterSearch>
+		
+		<!-- Mass action -->
+		<massaction name="listing_massaction">
+			<argument name="data" xsi:type="array">
+				<item name="config" xsi:type="array">
+					<item name="selectProvider" xsi:type="string">orderreview_feedback_listing.orderreview_feedback_listing.orderreviwe_feedback_columns.ids</item>
+					<item name="indexField" xsi:type="string">id</item>
+				</item>
+			</argument>
+			<action name="delete">
+				<argument name="data" xsi:type="array">
+					<item name="config" xsi:type="array">
+						<item name="type" xsi:type="string">delete</item>
+						<item name="label" xsi:type="string" translate="true">Delete</item>
+						<item name="url" xsi:type="url" path="jobs/department/massDelete"/>
+						<item name="confirm" xsi:type="array">
+							<item name="title" xsi:type="string" translate="true">Delete items</item>
+							<item name="message" xsi:type="string" translate="true">Are you sure you wan't to delete selected items?</item>
+						</item>
+					</item>
+				</argument>
+			</action>
+		</massaction>
+		
+		<!-- Paging -->
+		<paging name="listing_paging">
+			<argument name="data" xsi:type="array">
+				<item name="config" xsi:type="array">
+					<item name="storageConfig" xsi:type="array">
+						<item name="provider" xsi:type="string">orderreview_feedback_listing.orderreview_feedback_listing.listing_top.bookmarks</item>
+						<item name="namespace" xsi:type="string">current.paging</item>
+					</item>
+					<item name="selectProvider" xsi:type="string">orderreview_feedback_listing.orderreview_feedback_listing.orderreviwe_feedback_columns.ids</item>
+					<item name="displayArea" xsi:type="string">bottom</item>
+				</item>
+			</argument>
+		</paging>
+		
+    </container>
+	
+	<columns name="orderrevie_feedback_columns">
+	
+		<argument name="data" xsi:type="array">
+            <item name="config" xsi:type="array">
+                <!-- Bookmarks behaviour -->
+                <item name="storageConfig" xsi:type="array">
+                    <item name="provider" xsi:type="string">orderreview_feedback_listing.orderreview_feedback_listing.listing_top.bookmarks</item>
+                    <item name="namespace" xsi:type="string">current</item>
+                </item>
+                <item name="childDefaults" xsi:type="array">
+                    <item name="controlVisibility" xsi:type="boolean">true</item>
+                    <!-- Bookmarks behaviour -->
+                    <item name="storageConfig" xsi:type="array">
+                        <item name="provider" xsi:type="string">orderreview_feedback_listing.orderreview_feedback_listing.listing_top.bookmarks</item>
+                        <item name="root" xsi:type="string">columns.${ $.index }</item>
+                        <item name="namespace" xsi:type="string">current.${ $.storageConfig.root}</item>
+                    </item>
+                </item>
+            </item>
+        </argument>
+ 
+        <!-- Add columns with checkboxes -->
+        <selectionsColumn name="ids">
+            <argument name="data" xsi:type="array">
+                <item name="config" xsi:type="array">
+                    <item name="resizeEnabled" xsi:type="boolean">false</item>
+                    <item name="resizeDefaultWidth" xsi:type="string">55</item>
+                    <item name="indexField" xsi:type="string">entity_id</item>
+                </item>
+            </argument>
+        </selectionsColumn>
+		
+        <!-- ID Column -->
+        <column name="id">
+            <argument name="data" xsi:type="array">
+                <item name="config" xsi:type="array">
+                    <item name="filter" xsi:type="string">textRange</item>
+                    <item name="sorting" xsi:type="string">asc</item>
+                    <item name="label" xsi:type="string" translate="true">ID</item>
+                </item>
+            </argument>
+        </column>
+		
+		
+ 
+        <!-- Name Column -->
+        <!--<column name="customer_id" class="Learning\Orderreview\Ui\Component\Listing\Columns\Customer">
+            <argument name="data" xsi:type="array">
+                <item name="config" xsi:type="array" >
+                    <item name="filter" xsi:type="string">text</item>
+                    <item name="editor" xsi:type="array">
+                        <item name="editorType" xsi:type="string">text</item>
+                        <item name="validation" xsi:type="array">
+                            <item name="required-entry" xsi:type="boolean">true</item>
+                        </item>
+                    </item>
+                    <item name="label" xsi:type="string" translate="true">Customer</item>
+                </item>
+            </argument>
+        </column>-->
+		
+		<column name="email">
+			<argument name="data" xsi:type="array">
+				<item name="config" xsi:type="array">
+					<item name="filter" xsi:type="string">text</item>
+					<item name="editor" xsi:type="string">text</item>
+					<item name="sortable" xsi:type="string">true</item>
+					<item name="label" xsi:type="string" translate="true">Customer Email</item>
+					<item name="sortOrder" xsi:type="number">30</item>
+				</item>
+			</argument>
+		</column>
+		
+		<column name="firstname">
+			<argument name="data" xsi:type="array">
+				<item name="config" xsi:type="array">
+					<item name="filter" xsi:type="string">text</item>
+					<item name="editor" xsi:type="string">text</item>
+					<item name="sortable" xsi:type="string">true</item>
+					<item name="label" xsi:type="string" translate="true">Customer Name</item>
+					<item name="sortOrder" xsi:type="number">30</item>
+				</item>
+			</argument>
+		</column>
+		
+		<column name="order_id">
+            <argument name="data" xsi:type="array">
+                <item name="config" xsi:type="array">
+                    <item name="filter" xsi:type="string">text</item>
+                    <item name="editor" xsi:type="array">
+                        <item name="editorType" xsi:type="string">text</item>
+                        <item name="validation" xsi:type="array">
+                            <item name="required-entry" xsi:type="boolean">true</item>
+                        </item>
+                    </item>
+                    <item name="label" xsi:type="string" translate="true">Order</item>
+                </item>
+            </argument>
+        </column>
+		
+		<column name="feedback_description">
+            <argument name="data" xsi:type="array">
+                <item name="config" xsi:type="array">
+                    <item name="filter" xsi:type="string">text</item>
+                    <item name="editor" xsi:type="array">
+                        <item name="editorType" xsi:type="string">text</item>
+                        <item name="validation" xsi:type="array">
+                            <item name="required-entry" xsi:type="boolean">true</item>
+                        </item>
+                    </item>
+                    <item name="label" xsi:type="string" translate="true">Description</item>
+                </item>
+            </argument>
+        </column>
+		
+		<column name="feedback_rating">
+            <argument name="data" xsi:type="array">
+                <item name="config" xsi:type="array">
+                    <item name="filter" xsi:type="string">text</item>
+                    <item name="editor" xsi:type="array">
+                        <item name="editorType" xsi:type="string">text</item>
+                        <item name="validation" xsi:type="array">
+                            <item name="required-entry" xsi:type="boolean">true</item>
+                        </item>
+                    </item>
+                    <item name="label" xsi:type="string" translate="true">Rating</item>
+                </item>
+            </argument>
+        </column>
+		
+		<actionsColumn name="actions" class="Learning\Orderreview\Ui\Component\Listing\Column\OrderreviewActions">
+            <argument name="data" xsi:type="array">
+                <item name="config" xsi:type="array">
+                    <item name="resizeEnabled" xsi:type="boolean">false</item>
+                    <item name="resizeDefaultWidth" xsi:type="string">107</item>
+                    <item name="indexField" xsi:type="string">id</item>
+                </item>
+            </argument>
+        </actionsColumn>
+    </columns>
+    
+</listing>
